@@ -25,8 +25,9 @@ function paintToCanavas() {
     return setInterval(() => {
         ctx.drawImage(video, 0, 0, width, height);
         let pixels = ctx.getImageData(0, 0, width, height)    
-        pixels = redEffect(pixels);
-        debugger;
+        pixels = rgbSplit(pixels);
+        ctx.globalAlpha = 0.8;
+        ctx.putImageData(pixels, 0 ,0);
 
     }, 16);
 }
@@ -45,13 +46,27 @@ function takePhoto(){
 }
 
 function redEffect(pixels) {
-    for(let i = o; i < pixels.length; i+=4) {
+    for(let i = o; i < pixels.data.length; i+=4) {
         pixels.data[i + 0] = pixels.data[i + 0] + 100;      // Rød
         pixels.data[i + 1] = pixels.data[i + 1] - 50;       // Grønn
         pixels.data[i + 2] = pixels.data[i + 2] * 0.5;    // Blå
     }
+    return pixels;
 }
 
+function rgbSplit(pixels){
+    for(let i = o; i < pixels.data.length; i+=4) {
+        pixels.data[i - 150] = pixels.data[i + 0] + 100;      // Rød
+        pixels.data[i + 500] = pixels.data[i + 1] - 50;       // Grønn
+        pixels.data[i - 550] = pixels.data[i + 2] * 0.5;    // Blå
+    }
+    return pixels;
+
+}
+
+function greenScreen(pixels) {
+    
+}
 
 getVideo();
 
