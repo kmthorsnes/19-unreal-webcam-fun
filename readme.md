@@ -1,7 +1,7 @@
 # Webcam fun / photo boot
 
 JS Exercises. 19th challenge of the #JavaScript30 course.
-Using JS to access webcamera for snaping photos and create color effects
+Using JS to access web camera for snaping photos and create color effects
 
 ## Technology
 
