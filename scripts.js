@@ -12,7 +12,7 @@ function getVideo(){
             video.play();
         })
         .catch(err => {
-            console.error('Neiiii, du må jo la meg bruke ditt webcamera!, err');
+            console.error('Neiiii, du må jo la meg bruke ditt webcamera!', err);
         })
 }
 
@@ -24,7 +24,11 @@ function paintToCanavas() {
 
     return setInterval(() => {
         ctx.drawImage(video, 0, 0, width, height);
-        }, 16);
+        let pixels = ctx.getImageData(0, 0, width, height)    
+        pixels = redEffect(pixels);
+        debugger;
+
+    }, 16);
 }
 
 function takePhoto(){
@@ -39,6 +43,15 @@ function takePhoto(){
     link.innerHTML = `<img src="${data}" alt="Kjekkas"; />`;
     strip.insertBefore(link, strip.firstChild);
 }
+
+function redEffect(pixels) {
+    for(let i = o; i < pixels.length; i+=4) {
+        pixels.data[i + 0] = pixels.data[i + 0] + 100;      // Rød
+        pixels.data[i + 1] = pixels.data[i + 1] - 50;       // Grønn
+        pixels.data[i + 2] = pixels.data[i + 2] * 0.5;    // Blå
+    }
+}
+
 
 getVideo();
 
